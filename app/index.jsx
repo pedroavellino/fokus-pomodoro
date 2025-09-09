@@ -59,6 +59,9 @@ export default function Index() {
     }
 
     setTimerRunning(true);
+
+    // PRIMEIRO TICK IMEDIATO
+    setSeconds(s => (s === 0 ? timerType.initialValue - 1 : s - 1));
     
     //JavaScript puro
     const id = setInterval(() => {
