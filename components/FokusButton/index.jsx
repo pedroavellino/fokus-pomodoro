@@ -1,5 +1,4 @@
 //Prática da componentização: dividir a tela em partes menores, independentes e reutilizáveis
-
 import { Pressable, Text, StyleSheet } from "react-native";
 
 export const FokusButton = ({ onPress, title, icon }) => {
