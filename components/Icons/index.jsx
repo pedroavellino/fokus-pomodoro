@@ -1,4 +1,4 @@
-import Svg, { Path } from 'react-native-svg';
+import Svg, { Circle, Path } from 'react-native-svg';
 
 export const IconPlay = () => {
     return (
@@ -7,7 +7,7 @@ export const IconPlay = () => {
         </Svg>
 
     )
-}
+};
 
 export const IconPause = () => {
     return (
@@ -15,4 +15,32 @@ export const IconPause = () => {
             <Path d="M8.01562 0.473022H12V14.4418H8.01562V0.473022ZM0 14.4418V0.473022H3.98438V14.4418H0Z" fill="#021123"/>
         </Svg>
     )
-}
+};
+
+export const IconCheck = ({ checked }) => {
+    return (
+        <Svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <Circle cx="12" cy="12" r="12" fill="white"/>
+            <Path d="M9 16.1719L19.5938 5.57812L21 6.98438L9 18.9844L3.42188 13.4062L4.82812 12L9 16.1719Z" fill="#021123"/>
+        </Svg>
+
+    )
+};
+
+export const IconPencil = () => {
+    return (
+        <Svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <Circle cx="16" cy="16" r="15.5" stroke="#021123"/>
+            <Path d="M24.7188 11.0312L22.8906 12.8594L19.1406 9.10938L20.9688 7.28125C21.1562 7.09375 21.3906 7 21.6719 7C21.9531 7 22.1875 7.09375 22.375 7.28125L24.7188 9.625C24.9062 9.8125 25 10.0469 25 10.3281C25 10.6094 24.9062 10.8438 24.7188 11.0312ZM7 21.25L18.0625 10.1875L21.8125 13.9375L10.75 25H7V21.25Z" fill="#021123"/>
+        </Svg>
+    )
+};
+
+export const IconPlus = ({ outline = false }) => {
+    return (
+        <Svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <Path d="M17.0156 12.9844V11.0156H12.9844V6.98438H11.0156V11.0156H6.98438V12.9844H11.0156V17.0156H12.9844V12.9844H17.0156ZM4.92188 4.96875C6.89062 3 9.25 2.01562 12 2.01562C14.75 2.01562 17.0938 3 19.0312 4.96875C21 6.90625 21.9844 9.25 21.9844 12C21.9844 14.75 21 17.1094 19.0312 19.0781C17.0938 21.0156 14.75 21.9844 12 21.9844C9.25 21.9844 6.89062 21.0156 4.92188 19.0781C2.98438 17.1094 2.01562 14.75 2.01562 12C2.01562 9.25 2.98438 6.90625 4.92188 4.96875Z" fill={outline ? "#021123" : "#B872FF"}/>
+        </Svg>
+
+    )
+};
