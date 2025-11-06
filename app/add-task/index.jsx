@@ -1,4 +1,5 @@
-import { Text, SafeAreaView } from "react-native";
+import { Text, SafeAreaView, View, TextInput, Pressable } from "react-native";
+import { IconSave } from "../../components/Icons";
 
 export default function AddTask () {
     return ( 
@@ -6,6 +7,18 @@ export default function AddTask () {
       <Text>
         Adicionar uma tarefa
       </Text>
+      <View>
+        <Text>
+          Em que você está trabalhando? 
+        </Text>
+        <TextInput />
+        <Pressable>
+          <IconSave /> 
+          <Text> 
+            Salvar
+          </Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
     )
 }
