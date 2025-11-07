@@ -3,8 +3,12 @@ import { FokusButton } from '../../components/FokusButton';
 import { IconPlus } from '../../components/Icons';
 import TaskItem from '../../components/TaskItem';
 import { router } from 'expo-router';
+import useTaskContext from '../../components/Context/useTaskContext';
 
 export default function Tasks () {
+
+    const { tasks } = useTaskContext()
+    
     return ( 
       <View style={styles.container}>
         <View style={styles.wrapper}>
@@ -12,13 +16,15 @@ export default function Tasks () {
           Lista de tarefas:
         </Text>
         <View style={styles.inner}>
-          <TaskItem
-            completed
-            text="Estudar React"
-          />
-          <TaskItem 
-            text="Estudar React Native"
-          />
+          {tasks.map(t => {
+            return (
+              <TaskItem 
+                completed={t.completed}
+                text={t.description}
+                key={t.id}
+              />
+            )
+          })}
         </View>
         <FokusButton 
           title="Adicionar nova tarefa" 
