@@ -1,18 +1,21 @@
-import { Text, SafeAreaView, View, TextInput, Pressable } from "react-native";
+import { Text, SafeAreaView, View, TextInput, Pressable, StyleSheet } from "react-native";
 import { IconSave } from "../../components/Icons";
 
 export default function AddTask () {
     return ( 
-    <SafeAreaView>
-      <Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.text}>
         Adicionar uma tarefa
       </Text>
-      <View>
-        <Text>
+      <View style={styles.inner}> 
+        <Text style={styles.label}>
           Em que você está trabalhando? 
         </Text>
-        <TextInput />
-        <Pressable>
+        <TextInput 
+          style={styles.input} 
+          numberOfLines={10} //Determina o número de linhas que terá a caixa de input
+        />
+        <Pressable style={styles.button}>
           <IconSave /> 
           <Text> 
             Salvar
@@ -22,3 +25,38 @@ export default function AddTask () {
     </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, //Todo componente View do RN já é flex por padrão
+    backgroundColor: "#021123",
+    gap: 16,
+    alignItems: "center",
+  },
+  text: {
+    color: "#FFF",
+    textAlign: "center",
+    fontSize: 26,
+  },
+  inner: {
+    backgroundColor: "#98A0A8",
+    width: "90%",
+    borderRadius: 8,
+    padding: 16,
+    gap: 32,
+  },
+  label: {
+    fontWeight: 600,
+    fontSize: 18,
+  },
+  input: {
+    backgroundColor: "#FFF",
+    padding: 16,
+    borderRadius: 8,
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+});
