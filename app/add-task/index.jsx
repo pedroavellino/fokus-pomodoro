@@ -1,34 +1,42 @@
-import { Text, SafeAreaView, View, TextInput, Pressable, StyleSheet } from "react-native";
+import { Text, View, TextInput, Pressable, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { IconSave } from "../../components/Icons";
 
 export default function AddTask () {
     return ( 
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>
-        Adicionar uma tarefa
-      </Text>
-      <View style={styles.inner}> 
-        <Text style={styles.label}>
-          Em que você está trabalhando? 
-        </Text>
-        <TextInput 
-          style={styles.input} 
-          numberOfLines={10} //Determina o número de linhas que terá a caixa de input
-        />
-        <Pressable style={styles.button}>
-          <IconSave /> 
-          <Text> 
-            Salvar
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inner}>
+          <Text style={styles.text}>
+            Adicionar uma tarefa
+          </Text> 
+          <Text style={styles.label}>
+            Em que você está trabalhando? 
           </Text>
-        </Pressable>
-      </View>
-    </SafeAreaView>
+          <TextInput 
+            style={styles.input} 
+            numberOfLines={10} 
+            multiline={true}
+          />
+          <View style={styles.actions}>
+            <Pressable style={styles.button}>
+              <IconSave /> 
+              <Text> 
+                Salvar
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
     )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, //Todo componente View do RN já é flex por padrão
+    flex: 1, 
     backgroundColor: "#021123",
     gap: 16,
     alignItems: "center",
@@ -53,6 +61,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     padding: 16,
     borderRadius: 8,
+    height: 100,
+  },
+  actions: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
   button: {
     flexDirection: "row",
