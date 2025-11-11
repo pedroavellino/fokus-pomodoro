@@ -7,7 +7,7 @@ import useTaskContext from '../../components/Context/useTaskContext';
 
 export default function Tasks () {
 
-    const { tasks } = useTaskContext()
+    const { tasks, toggleTaskCompleted } = useTaskContext()
     
     return ( 
       <View style={styles.container}>
@@ -18,7 +18,7 @@ export default function Tasks () {
               renderItem={({ item }) => <TaskItem 
                 completed={item.completed}
                 text={item.description}
-                key={item.id}
+                onToggleComplete={() => toggleTaskCompleted(item.id)}                
               />}
               keyExtractor={item => item.id}
               ItemSeparatorComponent={() => 

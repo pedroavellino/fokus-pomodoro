@@ -1,9 +1,41 @@
-import { createContext, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createContext, useEffect, useState } from "react";
 
 export const TaskContext = createContext();
 
+const tasksStorageKey = "fokus-tasks";
+
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem(tasksStorageKey);
+        const loadedData = jsonValue != null ? JSON.parse(jsonValue) : [];
+        setTasks(loadedData)
+        setIsLoaded(true)
+      } catch (e) {
+        //error reading value
+      }
+    }
+    getData()
+  }, [])
+  
+  useEffect(() => {
+    const storeData = async (value) => {
+      try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem(tasksStorageKey, jsonValue);
+      } catch (e) {
+        //saving error
+      }
+    };
+    if (isLoaded) {
+      storeData(tasks)
+    }
+  }, [tasks])
 
   const addTask = (description) => {
     console.log("Tarefa vai ser adicionada")
@@ -19,8 +51,8 @@ export function TasksProvider({ children }) {
   };
 
   const toggleTaskCompleted = (id) => {
-    setTasks((oldState) => {
-      return oldState.map((t) => {
+    setTasks(oldState => {
+      return oldState.map(t => {
         if (t.id == id) {
           t.completed = !t.completed;
         }
