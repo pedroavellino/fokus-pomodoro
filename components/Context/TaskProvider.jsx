@@ -67,6 +67,17 @@ export function TasksProvider({ children }) {
     });
   };
 
+  const updateTask = (id, newDescription) => {
+    setTasks(oldState => 
+      oldState.map(t => {
+        if (t.id == id) {
+          return { ...t, description: newDescription }
+        }
+        return t
+      })
+    )
+  }
+
   return (
     <TaskContext.Provider
       value={{
@@ -74,6 +85,7 @@ export function TasksProvider({ children }) {
         addTask,
         toggleTaskCompleted,
         deleteTask,
+        updateTask
       }}
     >
       {children}
