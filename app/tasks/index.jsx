@@ -18,7 +18,8 @@ export default function Tasks () {
               renderItem={({ item }) => <TaskItem 
                 completed={item.completed}
                 text={item.description}
-                onToggleComplete={() => toggleTaskCompleted(item.id)}                
+                onToggleComplete={() => toggleTaskCompleted(item.id)} 
+                onPressEdit={() => router.navigate(`/edit-task/${item.id}`)}               
               />}
               keyExtractor={item => item.id}
               ItemSeparatorComponent={() => 
