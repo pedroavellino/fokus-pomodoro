@@ -1,7 +1,5 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
-import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
 import { TasksProvider } from "../components/Context/TaskProvider";
 import { BackButtonDrawer } from "../components/BackButtonDrawer";
 
