@@ -1,29 +1,36 @@
-//Prática da componentização: dividir a tela em partes menores, independentes e reutilizáveis
 import { Pressable, Text, StyleSheet } from "react-native";
 
 export const FokusButton = ({ onPress, title, icon, outline }) => {
-    return (
-        <Pressable 
-          style={[styles.button, outline && styles.outlineButton]} 
-          onPress={onPress} 
-        >
-          {icon}
-          <Text style={[styles.buttonText, outline && styles.outlineButtonText]}>
-            {title}
-          </Text>
-        </Pressable>
-    )
-}
+  return (
+    <Pressable
+      style={({ pressed }) => [
+        styles.button,
+        outline && styles.outlineButton,
+        pressed && styles.pressed,
+      ]}
+      onPress={onPress}
+    >
+      {icon}
+      <Text style={[styles.buttonText, outline && styles.outlineButtonText]}>
+        {title}
+      </Text>
+    </Pressable>
+  );
+};
 
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#B872FF",
-    borderRadius: 32,
-    padding: 8,
+    borderRadius: 999,
+    height: 52,
+    paddingVertical: 14,
+    paddingHorizontal: 28,
     flexDirection: "row",
     gap: 12,
     alignItems: "center",
     justifyContent: "center",
+    alignSelf: "center",
+    width: 280,
   },
   outlineButton: {
     backgroundColor: "transparent",
@@ -33,9 +40,13 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: "center",
     color: "#021123",
-    fontSize: 18
+    fontSize: 18,
+    fontWeight: "700",
   },
   outlineButtonText: {
     color: "#B872FF",
   },
-})
+  pressed: {
+    opacity: 0.9,
+  },
+});
