@@ -3,7 +3,7 @@ import { FokusButton } from '../../components/FokusButton';
 import { IconPlus } from '../../components/Icons';
 import TaskItem from '../../components/TaskItem';
 import { router } from 'expo-router';
-import useTaskContext from '../../components/Context/useTaskContext';
+import useTaskContext from '../../components/context/useTaskContext';
 
 export default function Tasks () {
 

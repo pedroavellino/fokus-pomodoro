@@ -1,5 +1,6 @@
 import { 
   KeyboardAvoidingView,
+  Keyboard,
   StyleSheet,
   Platform,
   Text,
@@ -9,22 +10,20 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 import { IconSave } from "../Icons"
-import{ useState, useEffect } from "react";
+import{ useState } from "react";
 
 
 export default function FormTask({ onFormSubmit, defaultValue = ""}) {
+
   const [description, setDescription] = useState(defaultValue);
 
-  useEffect(() => {
-    setDescription(defaultValue ?? "");
-  }, [defaultValue]);
-
-  function submitTask() {
-    if (!description) return;
-    onFormSubmit?.(description);
-    setDescription("");
-  }
-  
+  const submitTask = () => {
+    if (!description) {
+      return
+    }
+    onFormSubmit(description)
+    setDescription("")
+  }  
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -32,7 +31,10 @@ export default function FormTask({ onFormSubmit, defaultValue = ""}) {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
-          <Text style={styles.text}>Adicionar uma tarefa</Text>
+          <Text style={styles.text}>
+            {/*Ternário no JSX*/}
+            {defaultValue ? "Editar uma tarefa" : "Adicionar uma tarefa"}
+          </Text>
           <Text style={styles.label}>Em que você está trabalhando?</Text>
           <TextInput 
             style={styles.input}

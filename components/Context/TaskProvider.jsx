@@ -17,7 +17,7 @@ export function TasksProvider({ children }) {
         setTasks(loadedData)
         setIsLoaded(true)
       } catch (e) {
-        //error reading value
+        console.warn("Erro ao ler tarefas de AsycStorage", e);
       }
     }
     getData()
@@ -29,13 +29,13 @@ export function TasksProvider({ children }) {
         const jsonValue = JSON.stringify(value);
         await AsyncStorage.setItem(tasksStorageKey, jsonValue);
       } catch (e) {
-        //saving error
+        console.warn("Erro ao ler tarefas de AsycStorage", e);
       }
     };
     if (isLoaded) {
       storeData(tasks)
     }
-  }, [tasks])
+  }, [tasks, isLoaded]);
 
   const addTask = (description) => {
     console.log("Tarefa vai ser adicionada")
@@ -44,39 +44,38 @@ export function TasksProvider({ children }) {
         ...oldState,
         {
           description,
-          id: oldState.length + 1,
+          completed: false,
+          id: Date.now(),
         },
       ];
     });
   };
 
   const toggleTaskCompleted = (id) => {
-    setTasks(oldState => {
-      return oldState.map(t => {
-        if (t.id == id) {
-          t.completed = !t.completed;
-        }
-        return t;
-      });
-    });
+    setTasks((oldState) => 
+      oldState.map((t) => 
+        t.id === id ? { ...t, completed: !t.completed } : t
+      )
+    );
   };
-
-  const deleteTask = (id) => {
-    setTasks((oldState) => {
-      return oldState.filter((t) => (t.id = !id));
-    });
-  };
-
+  
   const updateTask = (id, newDescription) => {
     setTasks(oldState => 
       oldState.map(t => {
-        if (t.id == id) {
+        if (t.id === id) {
           return { ...t, description: newDescription }
         }
         return t
       })
     )
   }
+  
+  const deleteTask = (id) => {
+    setTasks((oldState) => {
+      return oldState.filter((t) => (t.id !== id));
+    });
+  };
+
 
   return (
     <TaskContext.Provider

@@ -1,6 +1,6 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
-import { TasksProvider } from "../components/Context/TaskProvider";
+import { TasksProvider } from "../components/context/TaskProvider";
 import { BackButtonDrawer } from "../components/BackButtonDrawer";
 
 export default function Layout() {
