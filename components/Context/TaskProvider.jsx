@@ -80,6 +80,7 @@ export function TasksProvider({ children }) {
     <TaskContext.Provider
       value={{
         tasks,
+        isLoaded,
         addTask,
         toggleTaskCompleted,
         deleteTask,

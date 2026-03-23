@@ -1,14 +1,21 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { Text, View } from "react-native";
+import { useEffect } from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import useTaskContext from "../../components/context/useTaskContext";
 import FormTask from "../../components/FormTask";
 
 export default function EditTask() {
   const { id } = useLocalSearchParams();
-  const { tasks, updateTask, deleteTask } = useTaskContext();
+  const { tasks, isLoaded, updateTask, deleteTask } = useTaskContext();
   const taskId = Number(id);
 
   const task = tasks.find((t) => t.id === taskId);
+
+  useEffect(() => {
+    if (isLoaded && !task) {
+      router.replace("/tasks");
+    }
+  }, [isLoaded, task]);
 
   const submitTask = (description) => {
     updateTask(taskId, description);
@@ -20,10 +27,18 @@ export default function EditTask() {
     router.navigate("/tasks");
   };
 
+  if (!isLoaded) {
+    return (
+      <View style={styles.feedbackContainer}>
+        <ActivityIndicator size="large" color="#FFF" />
+      </View>
+    );
+  }
+
   if (!task) {
     return (
-      <View>
-        <Text>Não foi encontrada uma tarefa com o id: {id}</Text>
+      <View style={styles.feedbackContainer}>
+        <ActivityIndicator size="large" color="#FFF" />
       </View>
     );
   }
@@ -36,3 +51,13 @@ export default function EditTask() {
     />
   );
 }
+
+const styles = StyleSheet.create({
+  feedbackContainer: {
+    flex: 1,
+    backgroundColor: "#021123",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
+});
