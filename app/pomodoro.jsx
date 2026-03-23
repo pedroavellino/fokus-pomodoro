@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ActionButton } from "../components/ActionButton";
 import { FokusButton } from "../components/FokusButton";
@@ -74,7 +74,7 @@ export default function Pomodoro() {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.topSection}>
           <Image
             source={timerType.image}
@@ -110,7 +110,7 @@ export default function Pomodoro() {
           </Text>
           <Text style={styles.footerText}>Desenvolvido por Pedro Avelino.</Text>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
