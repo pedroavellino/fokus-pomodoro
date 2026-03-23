@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FokusButton } from "../components/FokusButton";
 

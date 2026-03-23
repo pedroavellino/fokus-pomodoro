@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Image, StyleSheet, Text, View, ScrollView } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ActionButton } from "../components/ActionButton";
 import { FokusButton } from "../components/FokusButton";
