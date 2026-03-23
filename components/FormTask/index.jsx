@@ -9,11 +9,15 @@ import {
   View,
   TouchableWithoutFeedback
 } from "react-native";
-import { IconSave } from "../Icons"
+import { IconSave, IconDelete } from "../Icons"
 import{ useState } from "react";
 
 
-export default function FormTask({ onFormSubmit, defaultValue = ""}) {
+export default function FormTask({
+  onFormSubmit,
+  onDeleteTask,
+  defaultValue = ""
+}) {
 
   const [description, setDescription] = useState(defaultValue);
 
@@ -23,7 +27,15 @@ export default function FormTask({ onFormSubmit, defaultValue = ""}) {
     }
     onFormSubmit(description)
     setDescription("")
-  }  
+  }
+  
+  const deleteTask = () => {
+    if (!onDeleteTask) {
+      return
+    }
+    onDeleteTask()
+  }
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -43,10 +55,20 @@ export default function FormTask({ onFormSubmit, defaultValue = ""}) {
             onChangeText={setDescription}
           />
           <View style={styles.action}>
-            <Pressable style={styles.button} onPress={submitTask}>
-              <IconSave />
-              <Text>Salvar</Text>
-            </Pressable>
+            {onDeleteTask && (
+              <View>
+                <Pressable style={styles.button} onPress={deleteTask}>
+                  <IconDelete />
+                  <Text>Deletar</Text>
+                </Pressable>
+              </View>
+            )}
+            <View>
+              <Pressable style={styles.button} onPress={submitTask}>
+                <IconSave />
+                <Text>Salvar</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -89,7 +111,8 @@ const styles = StyleSheet.create({
   },
   action: {
     flexDirection: "row",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    gap: 24,
   },
   button: {
     flexDirection: "row",

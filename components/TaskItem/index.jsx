@@ -1,4 +1,5 @@
 import { Text, View, Pressable, StyleSheet } from "react-native";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { IconCheck, IconPencil } from "../Icons/";
 
 //Receber via props
@@ -6,7 +7,8 @@ const TaskItem = ({
   completed, 
   text, 
   onToggleComplete, 
-  onPressEdit 
+  onPressEdit,
+  onPressDelete
 }) => {
 
   const cardStyles = [styles.card];
@@ -22,9 +24,14 @@ const TaskItem = ({
       <Text style={styles.text}>
         {text}
       </Text>
-      <Pressable onPress={onPressEdit}>
-        <IconPencil />
-      </Pressable>
+      <View style={styles.actions}>
+        <Pressable onPress={onPressEdit}>
+          <IconPencil />
+        </Pressable>
+        <Pressable onPress={onPressDelete}>
+          <FontAwesome6 name="trash" size={24} color="black" />
+        </Pressable>
+      </View>
     </View>
   )
 }
@@ -48,6 +55,11 @@ const styles = StyleSheet.create ({
     color: "#021123",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  actions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
   }
 });
 

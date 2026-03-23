@@ -5,13 +5,18 @@ import FormTask from "../../components/FormTask";
 
 export default function EditTask() {
   const { id } = useLocalSearchParams();
-  const { tasks, updateTask } = useTaskContext();
+  const { tasks, updateTask, deleteTask } = useTaskContext();
   const taskId = Number(id);
 
   const task = tasks.find((t) => t.id === taskId);
 
   const submitTask = (description) => {
     updateTask(taskId, description);
+    router.navigate("/tasks");
+  };
+
+  const handleDeleteTask = () => {
+    deleteTask(taskId);
     router.navigate("/tasks");
   };
 
@@ -23,5 +28,11 @@ export default function EditTask() {
     );
   }
 
-  return <FormTask onFormSubmit={submitTask} defaultValue={task.description} />;
+  return (
+    <FormTask
+      onFormSubmit={submitTask}
+      onDeleteTask={handleDeleteTask}
+      defaultValue={task.description}
+    />
+  );
 }
