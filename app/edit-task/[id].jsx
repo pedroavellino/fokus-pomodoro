@@ -6,11 +6,12 @@ import FormTask from "../../components/FormTask";
 export default function EditTask() {
   const { id } = useLocalSearchParams();
   const { tasks, updateTask } = useTaskContext();
+  const taskId = Number(id);
 
-  const task = tasks.find((t) => t.id === id);
+  const task = tasks.find((t) => t.id === taskId);
 
   const submitTask = (description) => {
-    updateTask(id, description);
+    updateTask(taskId, description);
     router.navigate("/tasks");
   };
 

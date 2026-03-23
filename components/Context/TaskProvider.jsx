@@ -38,7 +38,6 @@ export function TasksProvider({ children }) {
   }, [tasks, isLoaded]);
 
   const addTask = (description) => {
-    console.log("Tarefa vai ser adicionada")
     setTasks((oldState) => {
       return [
         ...oldState,

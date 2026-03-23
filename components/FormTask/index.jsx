@@ -32,8 +32,7 @@ export default function FormTask({ onFormSubmit, defaultValue = ""}) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
           <Text style={styles.text}>
-            {/*Ternário no JSX*/}
-            {defaultValue ? "Editar uma tarefa" : "Adicionar uma tarefa"}
+            {defaultValue ? "Editar uma tarefa:" : "Adicionar uma tarefa:"}
           </Text>
           <Text style={styles.label}>Em que você está trabalhando?</Text>
           <TextInput 
@@ -41,9 +40,9 @@ export default function FormTask({ onFormSubmit, defaultValue = ""}) {
             numberOfLines={10}
             multiline={true}
             value={description}
-            onchangeText={setDescription}
+            onChangeText={setDescription}
           />
-          <View style={styles.actions}>
+          <View style={styles.action}>
             <Pressable style={styles.button} onPress={submitTask}>
               <IconSave />
               <Text>Salvar</Text>
@@ -51,7 +50,6 @@ export default function FormTask({ onFormSubmit, defaultValue = ""}) {
           </View>
         </View>
       </TouchableWithoutFeedback>
-
     </KeyboardAvoidingView>
   );
 }
@@ -67,25 +65,27 @@ const styles = StyleSheet.create({
   inner: {
     backgroundColor: "#98A0A8",
     width: "90%",
+    height: 310,
     borderRadius: 8,
+    padding: 16,
+    gap: 32,
 
   },
   text: {
     color: "#FFF",
     width: "90%",
     borderRadius: 8,
-    padding: 16,
     gap: 32,
   },
   label: {
     fontWeight: 600,
-    fontSize: 18,
+    fontSize: 22,
   },
   input: {
     backgroundColor: "#FFF",
     padding: 16,
     borderRadius: 8,
-    height: 100,
+    height: 120,
   },
   action: {
     flexDirection: "row",
